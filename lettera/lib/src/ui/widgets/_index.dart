@@ -6,5 +6,7 @@ export 'app_switch.dart';
 export 'app_tool_bar.dart';
 export 'display_value_field.dart';
 export 'draggable_value_field.dart';
+export 'language_analyser_settings_component.dart';
+export 'non_latin_letters_field.dart';
 export 'parse_setup_settings_components.dart';
 export 'value_field.dart';

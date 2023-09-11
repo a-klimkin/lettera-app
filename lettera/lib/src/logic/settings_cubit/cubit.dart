@@ -17,6 +17,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       SettingsState(
         status: SettingsStateStatus.initialized,
         fields: storage.fieldPropertiesList,
+        checkLatinLetters: storage.checkLatinLetters,
         parseFromSnakeCase: storage.parseFromSnakeCase,
         parseFromCamelCase: storage.parseFromCamelCase,
       ),
@@ -52,6 +53,18 @@ class SettingsCubit extends Cubit<SettingsState> {
         .toList();
 
     _updateState(list);
+  }
+
+
+  void onCheckLatinChanged(bool value) {
+    emit(
+      state.copyWith(
+        status: SettingsStateStatus.parserChanged,
+        checkLatinLetters: value,
+      ),
+    );
+
+    services.get<LocalStorage>().checkLatinLetters = value;
   }
 
   void changeFieldPosition(int oldIndex, int newIndex) {

@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../entity/defined_text.dart';
 import '../../entity/field_properties.dart';
+import '../utils/latin_letters_definer.dart';
 import '../utils/text_convertor.dart';
 import '../../entity/field_types.dart';
 
@@ -44,6 +46,7 @@ class MainCubit extends Cubit<MainState> with TextConvertorMixin {
           camelCase: toCamelCase(line),
           fileName: tofileName(line),
           variableName: toVariableName(line),
+          nonLatinLetters: _defineNonLatinLetters(line),
         ),
       );
     }
@@ -54,11 +57,16 @@ class MainCubit extends Cubit<MainState> with TextConvertorMixin {
   void setupSettings({
     bool? fromCamelCase,
     bool? fromSnakeCase,
+    bool? checkLatinLetters,
   }) => emit(
       MainState(
         fields: state.fields,
         convertFromCamelCase: fromCamelCase ?? state.convertFromCamelCase,
         convertFromSnakeCase: fromSnakeCase ?? state.convertFromSnakeCase,
+        checkLatinLetters: checkLatinLetters ?? state.checkLatinLetters,
       ),
     );
+
+  List<DefinedText> _defineNonLatinLetters(String value) =>
+      LatinLettersDefiner.defineNonLatin(value);
 }

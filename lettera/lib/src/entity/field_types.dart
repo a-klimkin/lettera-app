@@ -7,8 +7,7 @@ enum FieldTypes {
   camelCase,
   fileName,
   variableName,
-  // todo
-  // latinLettersValidation,
+  latinLettersValidation,
 }
 
 const List<FieldTypes> defaultFieldsOrder = [
@@ -19,6 +18,7 @@ const List<FieldTypes> defaultFieldsOrder = [
   FieldTypes.capitalizeSentence,
   FieldTypes.camelCase,
   FieldTypes.fileName,
+  FieldTypes.variableName,
   FieldTypes.variableName,
 ];
 
@@ -36,6 +36,7 @@ extension FieldTypesExtension on FieldTypes {
     FieldTypes.camelCase => 'Camel case',
     FieldTypes.fileName => 'Snake case',
     FieldTypes.variableName => 'Lower camel case',
+    FieldTypes.latinLettersValidation => 'No latin letters checker',
   };
 
   String get defaultValue => switch (this) {
@@ -47,6 +48,7 @@ extension FieldTypesExtension on FieldTypes {
     FieldTypes.camelCase => 'CamelCase',
     FieldTypes.fileName => 'snake_case',
     FieldTypes.variableName => 'lowerCamelCase',
+    FieldTypes.latinLettersValidation => '',
   };
 
   String get description => switch (this) {
@@ -58,5 +60,6 @@ extension FieldTypesExtension on FieldTypes {
     FieldTypes.camelCase => 'Words are written without spaces, and the first letter of each word is capitalized. Also called Upper Camel Case or Pascal Casing.',
     FieldTypes.variableName => 'A variation of Camel Case in which the fist letter of the word is lowercase, e.g. iPhone, iPad, etc.',
     FieldTypes.fileName => 'Punctuation is removed and spaces are replaced by a single underscore.',
+    FieldTypes.latinLettersValidation => 'Check text for non-Latin characters.',
   };
 }

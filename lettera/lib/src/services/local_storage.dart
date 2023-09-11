@@ -37,6 +37,10 @@ class LocalStorage {
 
   set parseFromSnakeCase(bool value) => _prefs.setBool('parseFromSnakeCase', value);
 
+  bool get checkLatinLetters => _prefs.getBool('checkLatinLetters') ?? true;
+
+  set checkLatinLetters(bool value) => _prefs.setBool('checkLatinLetters', value);
+
   int get colorSchemeSeed => _prefs.getInt('colorSchemeSeed') ?? Palette.blackPearl.value;
 
   set colorSchemeSeed(int value) => _prefs.setInt('colorSchemeSeed', value);

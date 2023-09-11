@@ -10,12 +10,14 @@ enum SettingsStateStatus {
 class SettingsState {
   final SettingsStateStatus status;
   final List<FieldProperties> fields;
+  final bool checkLatinLetters;
   final bool parseFromSnakeCase;
   final bool parseFromCamelCase;
 
   const SettingsState({
     this.status = SettingsStateStatus.initialized,
     this.fields = const [],
+    this.checkLatinLetters = true,
     this.parseFromSnakeCase = false,
     this.parseFromCamelCase = false,
   });
@@ -23,12 +25,14 @@ class SettingsState {
   SettingsState copyWith({
     SettingsStateStatus? status,
     List<FieldProperties>? fields,
+    bool? checkLatinLetters,
     bool? parseFromSnakeCase,
     bool? parseFromCamelCase,
   }) =>
       SettingsState(
         status: status ?? this.status,
         fields: fields ?? this.fields,
+        checkLatinLetters: checkLatinLetters ?? this.checkLatinLetters,
         parseFromSnakeCase: parseFromSnakeCase ?? this.parseFromSnakeCase,
         parseFromCamelCase: parseFromCamelCase ?? this.parseFromCamelCase,
       );
@@ -40,6 +44,7 @@ class SettingsState {
           runtimeType == other.runtimeType &&
           status == other.status &&
           fields == other.fields &&
+          checkLatinLetters == other.checkLatinLetters &&
           parseFromSnakeCase == other.parseFromSnakeCase &&
           parseFromCamelCase == other.parseFromCamelCase;
 
@@ -47,6 +52,7 @@ class SettingsState {
   int get hashCode =>
       status.hashCode ^
       fields.hashCode ^
+      checkLatinLetters.hashCode ^
       parseFromSnakeCase.hashCode ^
       parseFromCamelCase.hashCode;
 }

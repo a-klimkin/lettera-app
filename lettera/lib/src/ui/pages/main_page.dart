@@ -12,6 +12,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppToolBar.main(
         onDownload: () => context.router.push(const DownloadRoute()),
@@ -30,28 +31,41 @@ class MainPage extends StatelessWidget {
           ),
           const AppDivider(),
           BlocBuilder<MainCubit, MainState>(
-              builder: (context, state) {
+            builder: (context, state) {
               return Expanded(
-                child: GridView.builder(
+                child: CustomScrollView(
                   physics: const BouncingScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisExtent: 82,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                  ),
-                  itemBuilder: (context, index) => DisplayValueField(
-                    type: state.fields[index],
-                    value: state.valueByFieldType(state.fields[index]),
-                  ),
-                  itemCount: state.fields.length,
+                  slivers: [
+                    if (state.checkLatinLetters) ...[
+                      SliverToBoxAdapter(
+                        child: NonLatinLettersField(
+                          definedTextList: state.nonLatinLetters,
+                        ),
+                      ),
+                      const SliverToBoxAdapter(
+                        child: AppDivider(),
+                      ),
+                    ],
+                    SliverGrid.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisExtent: 82,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                      ),
+                      itemBuilder: (context, index) => DisplayValueField(
+                        type: state.fields[index],
+                        value: state.valueByFieldType(state.fields[index]),
+                      ),
+                      itemCount: state.fields.length,
+                    ),
+                  ],
                 ),
               );
-            }
+            },
           ),
         ],
       ),
     );
   }
 }
-

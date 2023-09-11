@@ -4,15 +4,17 @@ import '../../entity/field_types.dart';
 
 class ValueField extends StatelessWidget {
   final FieldTypes type;
+  final RichText? child;
   final String? value;
-  final Widget action;
+  final Widget? action;
 
   const ValueField({
     super.key,
-    required this.value,
     required this.type,
-    required this.action,
-  });
+    this.value,
+    this.action,
+    this.child,
+  }) : assert((child == null && value != null) || (child != null && value == null));
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,7 @@ class ValueField extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: SelectableText(
+                child: child ?? SelectableText(
                   value ?? '',
                   style: TextStyle(
                     fontSize: 14,
@@ -73,7 +75,8 @@ class ValueField extends StatelessWidget {
                   ),
                 ),
               ),
-              action,
+              if (action != null)
+                action!,
             ],
           ),
         ),

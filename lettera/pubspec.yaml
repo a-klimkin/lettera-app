@@ -1,7 +1,6 @@
 name: lettera
-description: A new Flutter project.
-publish_to: 'none'
-version: 1.0.0+1
+description: Application can a bit modify text for your needs
+version: 1.0.0+2
 
 environment:
   sdk: '>=3.0.6 <4.0.0'

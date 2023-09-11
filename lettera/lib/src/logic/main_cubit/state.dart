@@ -11,10 +11,11 @@ class MainState {
   final String camelCase;
   final String fileName;
   final String variableName;
-  final List<String> nonLatinLetters;
+  final List<DefinedText> nonLatinLetters;
   final List<FieldTypes> fields;
   final bool convertFromCamelCase;
   final bool convertFromSnakeCase;
+  final bool checkLatinLetters;
 
   const MainState({
     this.initValue = '',
@@ -30,6 +31,7 @@ class MainState {
     this.fields = const [],
     this.convertFromCamelCase = false,
     this.convertFromSnakeCase = false,
+    this.checkLatinLetters = true,
   });
 
   String valueByFieldType(FieldTypes type) =>
@@ -42,6 +44,7 @@ class MainState {
         FieldTypes.camelCase => camelCase,
         FieldTypes.fileName => fileName,
         FieldTypes.variableName => variableName,
+        _ => '',
       };
 
   MainState copyWith({
@@ -54,10 +57,11 @@ class MainState {
     String? camelCase,
     String? fileName,
     String? variableName,
-    List<String>? nonLatinLetters,
+    List<DefinedText>? nonLatinLetters,
     List<FieldTypes>? fields,
     bool? convertFromCamelCase,
     bool? convertFromSnakeCase,
+    bool? checkLatinLetters,
   }) => MainState(
           initValue: initValue ?? this.initValue,
           lowCase: lowCase ?? this.lowCase,
@@ -72,6 +76,7 @@ class MainState {
           fields: fields ?? this.fields,
           convertFromCamelCase: convertFromCamelCase ?? this.convertFromCamelCase,
           convertFromSnakeCase: convertFromSnakeCase ?? this.convertFromSnakeCase,
+          checkLatinLetters: checkLatinLetters ?? this.checkLatinLetters,
         );
 
   @override
@@ -91,7 +96,8 @@ class MainState {
           nonLatinLetters == other.nonLatinLetters &&
           fields == other.fields &&
           convertFromCamelCase == other.convertFromCamelCase &&
-          convertFromSnakeCase == other.convertFromSnakeCase;
+          convertFromSnakeCase == other.convertFromSnakeCase &&
+          checkLatinLetters == other.checkLatinLetters;
 
   @override
   int get hashCode =>
@@ -106,11 +112,12 @@ class MainState {
       variableName.hashCode ^
       nonLatinLetters.hashCode ^
       fields.hashCode ^
+      checkLatinLetters.hashCode ^
       convertFromCamelCase.hashCode ^
       convertFromSnakeCase.hashCode;
 
   @override
   String toString() {
-    return 'MainState{initValue: $initValue, lowCase: $lowCase, upperCase: $upperCase, capitalizeFirstWord: $capitalizeFirstWord, capitalizeAllWords: $capitalizeAllWords, capitalizeSentence: $capitalizeSentence, camelCase: $camelCase, fileName: $fileName, variableName: $variableName, nonLatinLetters: $nonLatinLetters, fields: $fields, convertFromCamelCase: $convertFromCamelCase, convertFromSnakeCase: $convertFromSnakeCase}';
+    return 'MainState{initValue: $initValue, lowCase: $lowCase, upperCase: $upperCase, capitalizeFirstWord: $capitalizeFirstWord, capitalizeAllWords: $capitalizeAllWords, capitalizeSentence: $capitalizeSentence, camelCase: $camelCase, fileName: $fileName, variableName: $variableName, nonLatinLetters: $nonLatinLetters, fields: $fields, convertFromCamelCase: $convertFromCamelCase, convertFromSnakeCase: $convertFromSnakeCase, checkLatinLetters: $checkLatinLetters}';
   }
 }

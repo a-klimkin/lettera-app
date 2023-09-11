@@ -23,18 +23,19 @@ class AppToolBar extends AppBar {
     centerTitle: false,
     toolbarHeight: appToolbarHeight,
     actions: [
-      if (kIsWeb)
-        TextButton(
-          onPressed: onDownload,
-          child: const Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.file_download_outlined),
-              SizedBox(width: 8),
-              Text('Download'),
-            ],
-          ),
-        ),
+      // todo: create .dmg installer file
+      // if (kIsWeb)
+      //   TextButton(
+      //     onPressed: onDownload,
+      //     child: const Row(
+      //       mainAxisSize: MainAxisSize.min,
+      //       children: [
+      //         Icon(Icons.file_download_outlined),
+      //         SizedBox(width: 8),
+      //         Text('Download'),
+      //       ],
+      //     ),
+      //   ),
       const SizedBox(width: 12),
       TextButton(
         onPressed: onSettings,

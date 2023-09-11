@@ -28,6 +28,7 @@ class SettingsPage extends StatelessWidget {
           parserChanged: () => main.setupSettings(
                 fromCamelCase: state.parseFromCamelCase,
                 fromSnakeCase: state.parseFromSnakeCase,
+                checkLatinLetters: state.checkLatinLetters,
               ),
         ),
         builder: (context, state) {
@@ -44,7 +45,12 @@ class SettingsPage extends StatelessWidget {
                       changeFromCamelCase: settings.changeFromCamelCase,
                     ),
                   ),
-                  const VerticalDivider(),
+                  Expanded(
+                    child: LanguageAnalyserSettingsComponent(
+                      checkLatinLetters: state.checkLatinLetters,
+                      onCheckLatinChanged: settings.onCheckLatinChanged,
+                    ),
+                  ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 24.0),
