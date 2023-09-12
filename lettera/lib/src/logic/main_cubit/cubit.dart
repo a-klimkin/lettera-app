@@ -26,6 +26,7 @@ class MainCubit extends Cubit<MainState> with TextConvertorMixin {
       clear();
     } else {
       String line = value;
+      List<DefinedText> definedNonLatinLetters = [];
 
       if (state.convertFromCamelCase) {
         line = fromCamelCase(line);
@@ -33,6 +34,10 @@ class MainCubit extends Cubit<MainState> with TextConvertorMixin {
 
       if (state.convertFromSnakeCase) {
         line = fromSnakeCase(line);
+      }
+
+      if (state.checkLatinLetters) {
+        definedNonLatinLetters = _defineNonLatinLetters(line);
       }
 
       emit(
@@ -46,7 +51,7 @@ class MainCubit extends Cubit<MainState> with TextConvertorMixin {
           camelCase: toCamelCase(line),
           fileName: tofileName(line),
           variableName: toVariableName(line),
-          nonLatinLetters: _defineNonLatinLetters(line),
+          nonLatinLetters: definedNonLatinLetters,
         ),
       );
     }
