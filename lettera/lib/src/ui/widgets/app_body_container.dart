@@ -2,32 +2,40 @@ import 'package:flutter/material.dart';
 
 class AppBodyContainer extends StatelessWidget {
   final List<Widget> children;
+  final Widget? header;
   final CrossAxisAlignment crossAxisAlignment;
 
   const AppBodyContainer({
     super.key,
-    this.crossAxisAlignment = CrossAxisAlignment.start,
     required this.children,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
+    this.header,
   });
 
   @override
   Widget build(BuildContext context) {
-    // add space for ads
+    Widget content = Align(
+      alignment: Alignment.topCenter,
+      child: Column(
+        crossAxisAlignment: crossAxisAlignment,
+        children: children,
+      ),
+    );
+
+    if (header != null) {
+      content = Column(
+        children: [
+          header!,
+          Expanded(
+            child: content,
+          ),
+        ],
+      );
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 1200.0,
-          ),
-          child: Column(
-            crossAxisAlignment: crossAxisAlignment,
-            children: children,
-          ),
-        ),
-      ),
+      child: content,
     );
   }
 }

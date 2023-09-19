@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../entity/field_types.dart';
+import '../../services/extensions/color_extension.dart';
 import 'value_field.dart';
 
 class DisplayValueField extends StatelessWidget {
@@ -17,7 +18,7 @@ class DisplayValueField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final borderColor = colorScheme.onSurface.withOpacity(0.12);
+    final borderColor = colorScheme.onSurface.disabled;
     final iconColor = colorScheme.primary;
     final bool hasValue = value?.isNotEmpty ?? false;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../config/constants.dart';
 import '../../config/dependencies.dart';
 import '../../entity/field_properties.dart';
 import '../../services/local_storage.dart';
@@ -79,6 +80,24 @@ class SettingsCubit extends Cubit<SettingsState> {
     );
 
     _updateState(list);
+  }
+
+  void resetSettings() {
+    _updateState(defaultFieldPropertiesList);
+
+    emit(
+      state.copyWith(
+        status: SettingsStateStatus.parserChanged,
+        parseFromCamelCase: defaultFromCamelCase,
+        parseFromSnakeCase: defaultFromSnakeCase,
+        checkLatinLetters: defaultLatinLettersChecker,
+      ),
+    );
+
+    services.get<LocalStorage>()
+      ..parseFromCamelCase = defaultFromCamelCase
+      ..parseFromSnakeCase = defaultFromSnakeCase
+      ..checkLatinLetters = defaultLatinLettersChecker;
   }
 
   void _updateState(List<FieldProperties> list) {

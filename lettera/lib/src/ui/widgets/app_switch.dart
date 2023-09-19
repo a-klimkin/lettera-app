@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../services/extensions/color_extension.dart';
+
 class AppSwitch extends StatelessWidget {
   const AppSwitch({
     super.key,
@@ -37,7 +39,7 @@ class AppSwitch extends StatelessWidget {
               message: tooltip,
               child: Icon(
                 Icons.info_outline_rounded,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.38),
+                color: Theme.of(context).colorScheme.onSurface.lighter,
                 size: 16,
               ),
             ),

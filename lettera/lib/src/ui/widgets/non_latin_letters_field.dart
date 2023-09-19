@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../entity/defined_text.dart';
 import '../../entity/field_types.dart';
+import '../../services/extensions/color_extension.dart';
 import 'value_field.dart';
 
 class NonLatinLettersField extends StatelessWidget {
@@ -17,7 +18,7 @@ class NonLatinLettersField extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textColor = colorScheme.onSurface;
     final errorBackgroundColor = colorScheme.errorContainer;
-    final borderColor = colorScheme.onSurface.withOpacity(0.12);
+    final borderColor = colorScheme.onSurface.disabled;
 
     final value = definedTextList.map((e) => e.value).join();
     final bool hasValue = value.isNotEmpty;

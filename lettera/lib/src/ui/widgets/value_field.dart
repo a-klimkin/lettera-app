@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../entity/field_types.dart';
+import '../../services/extensions/color_extension.dart';
 
 class ValueField extends StatelessWidget {
   final FieldTypes type;
@@ -19,8 +20,8 @@ class ValueField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final titleColor = colorScheme.onSurface.withOpacity(0.38);
-    final borderColor = colorScheme.onSurface.withOpacity(0.12);
+    final titleColor = colorScheme.onSurface.lighter;
+    final borderColor = colorScheme.onSurface.disabled;
     final valueColor = colorScheme.onSurface;
 
     return Column(

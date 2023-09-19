@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../entity/field_properties.dart';
 import '../../entity/field_types.dart';
+import '../../services/extensions/color_extension.dart';
 import 'value_field.dart';
 
 class DraggableValueField extends StatelessWidget {
@@ -18,7 +19,7 @@ class DraggableValueField extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final iconColor = colorScheme.primary;
-    final defaultColor = colorScheme.onSurface.withOpacity(0.12);
+    final defaultColor = colorScheme.onSurface.disabled;
 
     return Padding(
       padding: const EdgeInsets.all(6.0),

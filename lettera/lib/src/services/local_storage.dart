@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../config/constants.dart';
 import '../config/palette.dart';
 import '../entity/field_properties.dart';
 
@@ -29,15 +30,15 @@ class LocalStorage {
     _prefs.setString('fieldPropertiesList', json);
   }
 
-  bool get parseFromCamelCase => _prefs.getBool('parseFromCamelCase') ?? false;
+  bool get parseFromCamelCase => _prefs.getBool('parseFromCamelCase') ?? defaultFromCamelCase;
 
   set parseFromCamelCase(bool value) => _prefs.setBool('parseFromCamelCase', value);
 
-  bool get parseFromSnakeCase => _prefs.getBool('parseFromSnakeCase') ?? false;
+  bool get parseFromSnakeCase => _prefs.getBool('parseFromSnakeCase') ?? defaultFromSnakeCase;
 
   set parseFromSnakeCase(bool value) => _prefs.setBool('parseFromSnakeCase', value);
 
-  bool get checkLatinLetters => _prefs.getBool('checkLatinLetters') ?? true;
+  bool get checkLatinLetters => _prefs.getBool('checkLatinLetters') ?? defaultLatinLettersChecker;
 
   set checkLatinLetters(bool value) => _prefs.setBool('checkLatinLetters', value);
 

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../config/constants.dart';
 import '../../config/route/app_router.gr.dart';
 import '../../logic/main_cubit/cubit.dart';
 import '../widgets/_index.dart';
@@ -18,10 +19,10 @@ class MainPage extends StatelessWidget {
         onDownload: () => context.router.push(const DownloadRoute()),
         onSettings: () => context.router.push(const SettingsRoute()),
       ),
-      body: AppBodyContainer(
+      body: Column(
         children: [
            Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24.0),
+            padding: const EdgeInsets.all(mainPadding),
             child: TextField(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -29,7 +30,7 @@ class MainPage extends StatelessWidget {
               onChanged: (value) => context.read<MainCubit>().onChangeValue(value),
             ),
           ),
-          const AppDivider(),
+          const AppDivider(indent: mainPadding),
           BlocBuilder<MainCubit, MainState>(
             builder: (context, state) {
               return Expanded(
@@ -37,27 +38,36 @@ class MainPage extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   slivers: [
                     if (state.checkLatinLetters) ...[
-                      SliverToBoxAdapter(
-                        child: NonLatinLettersField(
-                          definedTextList: state.nonLatinLetters,
+                      SliverPadding(
+                        padding: const EdgeInsets.symmetric(horizontal: mainPadding),
+                        sliver: SliverToBoxAdapter(
+                          child: NonLatinLettersField(
+                            definedTextList: state.nonLatinLetters,
+                          ),
                         ),
                       ),
                       const SliverToBoxAdapter(
-                        child: AppDivider(),
+                        child: AppDivider(indent: mainPadding),
                       ),
                     ],
-                    SliverGrid.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisExtent: 82,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
+                    SliverPadding(
+                      padding: const EdgeInsets.symmetric(horizontal: mainPadding),
+                      sliver: SliverGrid.builder(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisExtent: 82,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                        ),
+                        itemBuilder: (context, index) => DisplayValueField(
+                          type: state.fields[index],
+                          value: state.valueByFieldType(state.fields[index]),
+                        ),
+                        itemCount: state.fields.length,
                       ),
-                      itemBuilder: (context, index) => DisplayValueField(
-                        type: state.fields[index],
-                        value: state.valueByFieldType(state.fields[index]),
-                      ),
-                      itemCount: state.fields.length,
+                    ),
+                    const SliverToBoxAdapter(
+                      child: SizedBox(height: 24.0),
                     ),
                   ],
                 ),

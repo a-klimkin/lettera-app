@@ -2,9 +2,6 @@ import 'package:flutter/foundation.dart';
 
 import 'field_types.dart';
 
-List<FieldProperties> get defaultFieldPropertiesList =>
-    defaultFieldsOrder.map((type) => FieldProperties(type)).toList();
-
 @immutable
 class FieldProperties {
   final FieldTypes type;
